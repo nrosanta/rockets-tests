@@ -1,4 +1,4 @@
-package com.testingfly.file.io;
+package com.testingfly.javautil;
 
 import com.opencsv.bean.CsvBindByName;
 

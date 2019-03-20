@@ -1,4 +1,4 @@
-package com.testingfly.file.io;
+package com.testingfly.javautil;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
