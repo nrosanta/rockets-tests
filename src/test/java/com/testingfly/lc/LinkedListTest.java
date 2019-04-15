@@ -1,6 +1,6 @@
 package com.testingfly.lc;
 
-public class LinkedList {
+public class LinkedListTest {
 
 	public static void main(String[] args) {
 		ListNode l1 = createLL(new int[] {9});

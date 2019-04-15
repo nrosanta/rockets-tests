@@ -29,15 +29,7 @@ package com.testingfly.lc;
 Note: The merging process must start from the root nodes of both trees.
  *
  */
-class TreeNode {
-	int val;
-	TreeNode left;
-	TreeNode right;
-	
-	TreeNode(int x) { 
-		val = x; 
-	}
-}
+
 
 public class MergeTwoBinaryTrees {
 
