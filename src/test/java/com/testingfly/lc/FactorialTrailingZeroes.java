@@ -24,7 +24,7 @@ public class FactorialTrailingZeroes {
 
 	}
 
-	public static int trailingZeroes(int n) {
+	public static int trailingZeroes1(int n) {
 		int count = 0;
 		for (int i = 5; n / i >= 1; i *= 5) {
 			count = count + (n / i);
@@ -32,5 +32,23 @@ public class FactorialTrailingZeroes {
 		return count;
 
 	}
+	
+    public static int trailingZeroes2(int n) {
+        int count = 0;
+        for (int i = n/5; i > 0; i = i/5) {
+            count = count + i;
+        }
+        return count;
+    }
+    
+    /*
+     * recursive approach
+     */
+    public static int trailingZeroes(int n) {
+    	
+    	if(n==0) return 0;
+    	return  (n/5) + trailingZeroes(n/5);
+        
+    }
 
 }
