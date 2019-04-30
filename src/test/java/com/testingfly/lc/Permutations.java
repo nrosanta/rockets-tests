@@ -34,12 +34,14 @@ public class Permutations {
 			
 		} else {
 			for(int i=left;i<=right;i++) {
-				int[]arr = Arrays.copyOf(nums, nums.length);
-				int temp = nums[left];
-				arr[left]=arr[i];
-				arr[i] = temp;
+//				int[]arr = Arrays.copyOf(nums, nums.length);
+//				int temp = arr[left];
+//				arr[left]=arr[i];
+//				arr[i] = temp;
+				swap(nums, left, i);
 				//System.out.println("Temp->i: "+i+"->"+Arrays.toString(arr));
-				permute(arr,res,left+1, right);
+				permute(nums,res,left+1, right);
+				swap(nums, left, i); //backtrack
 			}
 		}
 		return res;
@@ -52,6 +54,12 @@ public class Permutations {
 			list.add(nums[i]);
 		
 		return list;
+	}
+	
+	public static void swap(int[] arr, int i, int j) {
+		int temp = arr[i];
+		arr[i]=arr[j];
+		arr[j] = temp;
 	}
 	
 	
