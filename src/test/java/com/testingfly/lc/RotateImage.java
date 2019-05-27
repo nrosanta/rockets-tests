@@ -68,6 +68,9 @@ public class RotateImage {
 			}
 	}
 
+	/*
+	 * n*n/2
+	 */
 	public void reverse(int[][] matrix) {
 		int len = matrix.length;
 		for (int i = 0; i < len; i++)

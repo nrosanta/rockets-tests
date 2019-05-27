@@ -101,5 +101,41 @@ public class KthSmallestElementinBST {
     
 }
 
+/*
+ * Using array object to track counter
+ */
+class Solution2 {
+    
+    public int kthSmallest(TreeNode root, int k) {
+        int[] counter = {0};
+        return helperKthSmallest(root, counter, k).val;
+        
+    }
+    
+    TreeNode helperKthSmallest(TreeNode root, int[] counter, int k){
+        if(root==null) return null ;
+        TreeNode left = helperKthSmallest(root.left, counter, k);
+        counter[0]++;
+        if(counter[0]==k) return root;
+        if(left!=null) return left;
+        return helperKthSmallest(root.right, counter, k);
+       
+    }
+    
+    /*
+     * Kth Largest using reversed In-Order traversal
+     */
+    TreeNode helperKthLargest(TreeNode root, int[] counter, int k){
+        if(root==null) return null ;
+        TreeNode right = helperKthLargest(root.right, counter, k);
+        counter[0]++;
+        if(counter[0]==k) return root;
+        if(right!=null) return right;
+        return helperKthLargest(root.left, counter, k);
+       
+    }
+    
+    
+}
 
 

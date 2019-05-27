@@ -26,11 +26,13 @@ import java.util.Arrays;
 public class LongetestCommonSubSequence {
 	static int counter = 0;
 	static int[][] arr;
+	static String str="";
 
 	public static void main(String[] args) {
 
-		String s1 = "ABBCC";
-		String s2 = "ABCBBC"; // ABBC
+		String s1 = "ABCBBC"; // ABBC
+		String s2 = "ABBCC";
+		
 		String s3 = "AGGTAB";
 		String s4 = "GXTXAYB"; // GTAB
 		String s5 = "BCBAC";
@@ -44,38 +46,40 @@ public class LongetestCommonSubSequence {
 
 		arr = new int[s1.length() + 1][s2.length() + 1];
 		initArr(arr);
-		// System.out.println("Array_Before: " + Arrays.deepToString(arr));
+		
 		System.out.println("LCS: " + longestCS(s1, s2, s1.length(), s2.length()) + " Stacked Calls: " + counter);
-		// System.out.println("Array_After: " + Arrays.deepToString(arr));
-		counter = 0;
-		arr = new int[s3.length()][s4.length()];
+		//System.out.println("LCS: "+str);
+		printLCSArr(arr);
+//		counter = 0;
+		arr = new int[s3.length()+1][s4.length()+1];
 		initArr(arr);
 		System.out.println("LCS: " + longestCS(s3, s4, s3.length(), s4.length()) + " Stacked Calls: " + counter);
-		// System.out.println("Array_After: " + Arrays.deepToString(arr));
-
-		counter = 0;
-		arr = new int[s5.length()][s6.length()];
-		initArr(arr);
-		System.out.println("LCS: " + longestCS(s5, s6, s5.length(), s6.length()) + " Stacked Calls: " + counter);
-		// System.out.println("Array_After: " + Arrays.deepToString(arr));
-		counter = 0;
-		arr = new int[s7.length()][s8.length()];
-		initArr(arr);
-		System.out.println("LCS: " + longestCS(s7, s8, s7.length(), s8.length()) + " Stacked Calls: " + counter);
-		// System.out.println("Array_After: " + Arrays.deepToString(arr));
-		counter = 0;
-		arr = new int[s9.length()][s10.length()];
-		initArr(arr);
-		System.out.println("LCS: " + longestCS(s9, s10, s9.length(), s10.length()) + " Stacked Calls: " + counter);
-		// System.out.println("Array_After: " + Arrays.deepToString(arr));
-		counter = 0;
-		arr = new int[s11.length()][s12.length()];
-		initArr(arr);
-		System.out.println("LCS: " + longestCS(s11, s12, s11.length(), s12.length()) + " Stacked Calls: " + counter);
-		// System.out.println("Array_After: " + Arrays.deepToString(arr));
-
-		lcsStr(s11, s12);
-		LCS(s11, s12);
+		printLCSArr(arr);
+//		// System.out.println("Array_After: " + Arrays.deepToString(arr));
+//
+//		counter = 0;
+//		arr = new int[s5.length()][s6.length()];
+//		initArr(arr);
+//		System.out.println("LCS: " + longestCS(s5, s6, s5.length(), s6.length()) + " Stacked Calls: " + counter);
+//		// System.out.println("Array_After: " + Arrays.deepToString(arr));
+//		counter = 0;
+//		arr = new int[s7.length()][s8.length()];
+//		initArr(arr);
+//		System.out.println("LCS: " + longestCS(s7, s8, s7.length(), s8.length()) + " Stacked Calls: " + counter);
+//		// System.out.println("Array_After: " + Arrays.deepToString(arr));
+//		counter = 0;
+//		arr = new int[s9.length()][s10.length()];
+//		initArr(arr);
+//		System.out.println("LCS: " + longestCS(s9, s10, s9.length(), s10.length()) + " Stacked Calls: " + counter);
+//		// System.out.println("Array_After: " + Arrays.deepToString(arr));
+//		counter = 0;
+//		arr = new int[s11.length()][s12.length()];
+//		initArr(arr);
+//		System.out.println("LCS: " + longestCS(s11, s12, s11.length(), s12.length()) + " Stacked Calls: " + counter);
+//		// System.out.println("Array_After: " + Arrays.deepToString(arr));
+//
+//		lcsStr(s11, s12);
+//		LCS(s11, s12);
 
 	}
 
@@ -139,8 +143,8 @@ public class LongetestCommonSubSequence {
 	}
 
 	public static void initArr(int[][] arr) {
-		for (int i = 0; i < arr.length; i++)
-			for (int j = 0; j < arr[0].length; j++)
+		for (int i = 1; i < arr.length; i++)
+			for (int j = 1; j < arr[0].length; j++)
 				arr[i][j] = -1;
 
 		// System.out.println("Array_Before: " + Arrays.deepToString(arr));
@@ -149,15 +153,20 @@ public class LongetestCommonSubSequence {
 	// recursive solution
 	public static int longestCS(String s1, String s2, int n1, int n2) {
 		counter++;
-
+		
 		if (n1 == 0 || n2 == 0)
 			return 0;
-
+		
+		if(arr[n1][n2]!=-1)
+			return arr[n1][n2];
+		
 		if (s1.charAt(n1 - 1) == s2.charAt(n2 - 1)) {
-			return 1 + longestCS(s1, s2, n1 - 1, n2 - 1);
-
+			arr[n1][n2]= longestCS(s1,s2,n1-1,n2-1)+1;
+			return arr[n1][n2]; 
+	
 		} else {
-			return getMax(longestCS(s1, s2, n1 - 1, n2), longestCS(s1, s2, n1, n2 - 1));
+			arr[n1] [n2] = Math.max(longestCS(s1, s2, n1 - 1, n2), longestCS(s1, s2, n1, n2 - 1)); 
+			return arr[n1][n2];
 		}
 
 	}
@@ -170,6 +179,8 @@ public class LongetestCommonSubSequence {
 		int x = s1.length();
 		int y = s2.length();
 		int[][] L = new int[x + 1][y + 1];
+		
+		
 
 		for (int i = 0; i < x; i++)
 			for (int j = 0; j < y; j++) {
@@ -185,6 +196,14 @@ public class LongetestCommonSubSequence {
 		showArr(L);
 		printLCS(L, s1, s2);
 
+	}
+	
+	static void printLCSArr(int[][] arr) {
+		for(int i=0;i<arr.length;i++) {
+			for(int j=0;j<arr[0].length;j++)
+				System.out.print(arr[i][j]+"\t");
+			System.out.println();
+		}
 	}
 
 }
